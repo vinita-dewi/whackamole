@@ -1,0 +1,82 @@
+body{
+    background-image: url("IMAGE/BG3.jpeg");
+    height: 100%;
+    width: 100%;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -40px;
+}
+.title{
+    text-align: center;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.title h1{
+    font-size: 50px;
+    color: white;
+    margin-bottom: 0px;
+    margin-top: 40px;
+    font-family: 'Walter Turncoat', cursive;
+}
+
+.start{
+    font-size:18px;
+    cursor: pointer;
+    font-family: 'Short Stack', cursive;
+}
+
+.timertitle, .scoretitle{
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    font-family: 'Short Stack', cursive;
+}
+
+#timernum, #scorenum{
+    font-size: 90px;
+    font-family: 'Short Stack', cursive;
+}
+.timer, .score{
+    height: 150px;
+    width: 150px;
+    border-radius:  50%;
+    background-color: black;
+    margin: 20px;
+}
+.timer h1,.score h1{
+    font-size: 120px;
+    text-align: center;
+    color: white;
+    margin: 10px
+}
+.sider{
+    display:  inline-block;
+    margin-left: 50px;
+
+}
+
+.game{
+    float: right;
+    margin-right: 200px;
+}
+
+.holes{
+    margin: 0px 20px 0px 20px;
+    width: 165px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: black;
+    overflow: hidden;
+}
+.moles{
+    position: relative;
+    top: 100%;
+    transition : all 0,5s;
+    cursor: pointer;
+}
+
+.holes.up .moles{
+    top: 0%;
+}

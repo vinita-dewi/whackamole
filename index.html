@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Whack a Mole!</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <link rel="shortcut icon" href="IMAGE/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Walter+Turncoat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Short+Stack&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="title">
+        <h1>Whack a Mole!</h1>
+        <button onClick="gameBegin()" class="start" id="startbutton">Start Game!</button>
+    </div>
+    <table class="sider" border="0">
+        <tr>
+            <td class="timertitle" height="45px">
+                <p2>TIME</p2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="timer">
+                    <h1><span id="timernum">0</span></h1>
+                </div>
+            </td>
+        <tr>
+            <td class="scoretitle" height="45px">
+                <p2>SCORES</p2>
+            </td>
+        </tr>
+        </tr>
+        <td>
+            <div class="score">
+                <h1><span id=scorenum>0</span></h1>
+            </div>
+        </td>
+    </table>
+    <table class="game" border="0">
+        <tr>
+            <td>
+                <div class="holes" id="hole1" width="160px height=" 160px">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole2" width="160px height=" 160px">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole3" width="160px" height="160px">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="holes" id="hole4" width="160px" height="160px">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole5" width="160px" height="160px">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole6" height="160px" class="hole6">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="holes" id="hole7" height="160px" class="hole7">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole8" height="160px" class="hole8">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="holes" id="hole9" height="160px" class="hole9">
+                    <div class="moles">
+                        <img src="IMAGE/Mole.png" width="160px" height="160px">
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <script>
+        var hole = document.getElementsByClassName("holes");
+        var arrMole = document.getElementsByClassName("moles");
+        var score = document.getElementById("scorenum");
+        var countdown = document.getElementById("timernum");
+        var timeCount;
+        var chooseHole = 0;
+        var prevHole = 0;
+        var cek = false
+        var points = 0;
+
+        function timer(min, max) {
+            return Math.round(Math.random() * (max - min) + min)
+        }
+
+        function randomize(hole) {
+            var index = Math.floor(Math.random() * hole.length);
+            chooseHole = hole[index]
+            if (chooseHole == prevHole) {
+                console.log('samaa!')
+                randomize(hole)
+
+            }
+            prevHole = chooseHole;
+            return chooseHole;
+        }
+
+        function showMole() {
+            var hideMole = timer(500,1000)  
+            var whichHole = randomize(hole)
+            whichHole.classList.add('up')
+            setTimeout(() => {
+                whichHole.classList.remove('up');
+                if (!cek) {
+                    showMole()
+                }
+            }, hideMole);
+        }
+
+        function gameBegin() {
+            countTime(30)
+            score.textContent = 0;
+            cek = false;
+            points = 0;
+            showMole();
+            setTimeout(() => cek = true, 30000) // timer 30s
+        }
+
+        function hit(e) {
+            points++
+            this.parentNode.classList.remove('up');
+            score.textContent = points;
+        }
+
+        for (var i = 0; i < arrMole.length; i++) {
+            arrMole[i].addEventListener('click', hit)
+        }
+
+        function countTime(second) {
+            var now = Date.now();
+            var later = now + second * 1000;
+            displayTime(second)
+            timeCount = setInterval(() => {
+                var remainingTime = Math.round((later - Date.now()) / 1000);
+                if (remainingTime < 0) {
+                    clearInterval(timeCount);
+                    return;
+                }
+                displayTime(remainingTime)
+            }, 1000)
+        }
+
+        function displayTime(second) {
+            countdown.textContent = second;
+        }
+    </script>
+</body>
