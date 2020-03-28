@@ -26,7 +26,7 @@ function randomize(hole) {
 }
 
 function showMole() {
-    var hideMole = timer(500,1000)  
+    var hideMole = timer(1000,1500)  
     var whichHole = randomize(hole)
     whichHole.classList.add('up')
     setTimeout(() => {
